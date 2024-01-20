@@ -2,10 +2,10 @@ cora
 python train.py --dname 'cora' --num_layers 32 --cuda 0 --feature_noise 0.0 --lamda 0.12 --hidden 1024 --wd 0.0 --epochs 5000 --runs 10 --lalpha --lr 0.0015 --alpha 0.28 --dropout 0.7 --method 'GCNII' --nh --step_size 180 --gamma 0.05
 
 cora_ca
-python train.py --dname 'coauthor_cora' --num_layers 32 --cuda 1 --feature_noise 0.0 --lamda 0.5 --hidden 512 --wd 0.0 --epochs 5000 --runs 10 --lalpha --lr 0.01 --alpha 0.4 --dropout 0.7 --method 'GCNII' --nh --step_size 20 --gamma 0.5
+python train.py --dname 'coauthor_cora' --num_layers 32 --cuda 2 --feature_noise 0.0 --lamda 0.5 --hidden 64 --wd 0.0 --epochs 5000 --runs 10 --lalpha --lr 0.01 --alpha 0.3 --dropout 0.7 --method 'GCNII' --step_size 65 --gamma 0.6 --nh 
 
 dblp_ca
-python train.py --dname 'coauthor_dblp' --num_layers 32 --cuda 5 --feature_noise 0.0 --lamda 0.5 --hidden 256 --wd 0.0 --epochs 5000 --runs 10 --lalpha --lr 0.01 --alpha 0.2 --dropout 0.5 --method 'GCNII' --nh
+python train_overs_energy.py --num_layers 8 --dname 'coauthor_dblp' --cuda 0 --feature_noise 0.0 --lamda 0.5 --hidden 64 --wd 0.0 --epochs 5000 --runs 10 --lalpha --lr 0.001 --alpha 0.4 --dropout 0.5 --method 'GCNII' --nh
 
 citeseer
 python train.py --dname 'citeseer' --num_layers 64 --cuda 7 --feature_noise 0.0 --lamda 0.94 --hidden 256 --wd 0 --epochs 5000 --runs 10 --lalpha --lr 0.0019 --alpha 0.5 --dropout 0.6 --method 'GCNII' --nh --step_size 35 --gamma 0.5
