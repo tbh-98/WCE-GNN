@@ -210,14 +210,6 @@ def ConstructH_HNHN(data):
 
 
 def generate_G_from_H(data):
-    """
-    This function generate the propagation matrix G for HGNN from incidence matrix H.
-    Here we assume data.edge_index is already the incidence matrix H. (can be done by ConstructH())
-    Adapted from HGNN github repo: https://github.com/iMoonLab/HGNN
-    :param H: hypergraph incidence matrix H
-    :param variable_weight: whether the weight of hyperedge is variable
-    :return: G
-    """
 #     ipdb.set_trace()
     H = data.edge_index
     H = np.array(H)
@@ -248,14 +240,6 @@ def generate_G_from_H(data):
 
 
 def generate_G_for_HNHN(data, args):
-    """
-    This function generate the propagation matrix G_V2E and G_E2V for HNHN from incidence matrix H.
-    Here we assume data.edge_index is already the incidence matrix H. (can be done by ConstructH())
-
-    :param H: hypergraph incidence matrix H
-    :param variable_weight: whether the weight of hyperedge is variable
-    :return: G
-    """
 #     ipdb.set_trace()
     H = data.edge_index
     alpha = args.HNHN_alpha
@@ -281,11 +265,7 @@ def generate_G_for_HNHN(data, args):
 
 
 def generate_norm_HNHN(H, data, args):
-    """
-    :param H: hypergraph incidence matrix H
-    :param variable_weight: whether the weight of hyperedge is variable
-    :return: G
-    """
+
 #     H = data.incident_mat
     alpha = args.HNHN_alpha
     beta = args.HNHN_beta
@@ -329,14 +309,7 @@ def generate_norm_HNHN(H, data, args):
 
 
 def ConstructV2V(data):
-    # Assume edge_index = [V;E], sorted
-    edge_index = np.array(data.edge_index)
-    """
-    For each he, clique-expansion. Note that we DONT allow duplicated edges.
-    Instead, we record its corresponding weights.
-    We default no self loops so far.
-    """
-# # Note that the method below for CE can be memory expensive!!!
+    
 #     new_edge_index = []
 #     for he in np.unique(edge_index[1, :]):
 #         nodes_in_he = edge_index[0, :][edge_index[1, :] == he]
@@ -465,8 +438,7 @@ def norm_contruction(data, option='all_one', TYPE='V2E'):
 
 
 def rand_train_test_idx(label, train_prop=.5, valid_prop=.25, ignore_negative=True, balance=False):
-    """ Adapted from https://github.com/CUAI/Non-Homophily-Benchmarks"""
-    """ randomly splits label into train/valid/test splits """
+    
     if not balance:
         if ignore_negative:
             labeled_nodes = torch.where(label != -1)[0]
