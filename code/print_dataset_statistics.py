@@ -1,15 +1,3 @@
-#! /usr/bin/env python
-# -*- coding: utf-8 -*-
-# vim:fenc=utf-8
-#
-# Copyright © 2021 
-#
-# Distributed under terms of the MIT license.
-
-"""
-
-"""
-
 import numpy as np
 import torch as th
 import pandas as pd
