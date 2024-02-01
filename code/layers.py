@@ -129,74 +129,6 @@ class MLP(nn.Module):
         x = self.lins[-1](x)
         return x
 
-
-class Res_GAT_layer(nn.Module):
-    def __init__(self, args, nhead, in_features, out_features):
-        super(Res_GAT_layer, self).__init__()
-        self.W = nn.Linear(in_features, out_features, bias=False)
-        self.args = args
-        if(args.conv_type == 'GATConv'):
-            self.conv = GATConv(in_features, out_features, num_heads = nhead)
-        elif(args.conv_type == 'GATv2Conv'):
-            self.conv = GATv2Conv(in_features, out_features, num_heads = nhead)
-
-    def reset_parameters(self):
-        self.W.reset_parameters()
-        self.conv.reset_parameters()
-        
-    def forward(self, x, x0, g, alpha, beta):
-        x = self.conv(g, x)
-        
-        x = x.mean(1)
-        xi = (1-alpha) * x + alpha * x0
-        x = (1-beta) * xi + beta * self.W(xi)
-
-        return x
-
-class GAT_layer2(nn.Module):
-    def __init__(self, args, device, nhead, in_features, out_features):
-        super(GAT_layer2, self).__init__()
-        self.args = args
-        self.step = args.step
-        if(args.conv_type == 'GATConv'):
-            self.conv = GATConv(in_features, out_features, num_heads = nhead)
-        elif(args.conv_type == 'GATv2Conv'):
-            self.conv = GATv2Conv(in_features, out_features, num_heads = nhead)
-        self.encoder = nn.Linear((args.hidden*nhead), args.hidden)
-
-    def reset_parameters(self):
-        self.conv.reset_parameters()
-        self.encoder.reset_parameters()
-        
-    def forward(self, x, x0, g, alpha):
-        for _ in range(self.step):
-            x = self.conv(g, x)
-            x = x.reshape(x0.shape[0], -1)
-            x = self.encoder(x)
-            x = (1 - alpha) * x + alpha * x0
-        return x
-
-
-class GAT_layer(nn.Module):
-    def __init__(self, args, nhead, in_features, out_features):
-        super(GAT_layer, self).__init__()
-        self.args = args
-        self.step = args.step
-        if(args.conv_type == 'GATConv'):
-            self.conv = GATConv(in_features, out_features, num_heads = nhead)
-        elif(args.conv_type == 'GATv2Conv'):
-            self.conv = GATv2Conv(in_features, out_features, num_heads = nhead)
-
-    def reset_parameters(self):
-        self.conv.reset_parameters()
-        
-    def forward(self, x, x0, g, alpha):
-        for _ in range(self.step):
-            x = self.conv(g, x)
-            x = x.mean(1)
-            x = (1 - alpha) * x + alpha * x0
-        return x
-
 class SparseLinear(nn.Module):
     r"""
     """
@@ -241,26 +173,6 @@ class SparseLinear(nn.Module):
             self.in_features, self.out_features, self.bias is not None
         )
 
-class GAT_ph_layer(nn.Module):
-    def __init__(self, args, nhead, in_features, out_features):
-        super(GAT_ph_layer, self).__init__()
-        self.args = args
-        self.step = args.step
-        if(args.conv_type == 'GATConv'):
-            self.conv = GATConv(in_features, out_features, num_heads = nhead)
-        elif(args.conv_type == 'GATv2Conv'):
-            self.conv = GATv2Conv(in_features, out_features, num_heads = nhead)
-
-    def reset_parameters(self):
-        self.conv.reset_parameters()
-        
-    def forward(self, x, x0, g, alpha, lamda):
-        for _ in range(self.step):
-            x_hat = self.conv(g, x)
-            x_hat = x_hat.mean(1)
-            x = (1 - alpha) * x + alpha * x_hat + alpha * lamda * x0
-        return x
-    
 class GraphConvolution(nn.Module):
 
     def __init__(self, in_features, out_features, residual=False, variant=False):
