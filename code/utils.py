@@ -9,9 +9,6 @@ from torch.nn.parameter import Parameter
 
 
 class HyperGraphConvolution(Module):
-    """
-    Simple GCN layer, similar to https://arxiv.org/abs/1609.02907
-    """
 
     def __init__(self, a, b, reapproximate=True, cuda=None):
         super(HyperGraphConvolution, self).__init__()
@@ -57,12 +54,6 @@ class HyperGraphConvolution(Module):
 
 
 class SparseMM(torch.autograd.Function):
-    """
-    Sparse x dense matrix multiplication with autograd support.
-    Implementation by Soumith Chintala:
-    https://discuss.pytorch.org/t/
-    does-pytorch-support-autograd-on-sparse-matrix/6156/7
-    """
     @staticmethod
     def forward(ctx, M1, M2):
         ctx.save_for_backward(M1, M2)
