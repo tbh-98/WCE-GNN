@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from torch import Tensor
 from torch.nn import Parameter
 
-from dgl.nn.pytorch.conv import GATConv, GATv2Conv, GINConv, GraphConv, APPNPConv, SGConv
+from dgl.nn.pytorch.conv import GATConv, GraphConv, SGConv
 
 
 class MLP(nn.Module):
