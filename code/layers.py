@@ -1,14 +1,3 @@
-#! /usr/bin/env python
-# -*- coding: utf-8 -*-
-# vim:fenc=utf-8
-#
-# Copyright © 2021 
-# Distributed under terms of the MIT license.
-
-"""
-This script contains layers used in AllSet and all other tested methods.
-"""
-
 import math
 import torch
 
