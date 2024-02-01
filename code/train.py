@@ -22,7 +22,6 @@ from preprocessing import *
 from convert_datasets_to_pygDataset import dataset_Hypergraph
 
 class Logger(object):
-    """ Adapted from https://github.com/snap-stanford/ogb/ """
 
     def __init__(self, runs, info=None):
         self.info = info
