@@ -367,16 +367,8 @@ if __name__ == '__main__':
         model = SGC(args)
     elif(args.method == 'GAT'):
         model = GAT(args)
-    elif(args.method == 'GATII'):
-        model = GATII(args)
-    elif(args.method == 'Res_GAT'):
-        model = Res_GAT(args)
     elif(args.method == 'GCN'):
         model = GCN(args)
-    elif(args.method == 'GIN'):
-        model = GIN(args, device)
-    elif(args.method == 'APPNP'):
-        model = APPNP(args)
         
     x, y = data.x, data.y
     
